@@ -6,11 +6,11 @@
 #    By: ravazque <ravazque@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/19 19:28:31 by ravazque          #+#    #+#              #
-#    Updated: 2025/05/20 17:41:53 by ravazque         ###   ########.fr        #
+#    Updated: 2025/05/22 15:41:09 by ravazque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = out
+NAME = philo
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
