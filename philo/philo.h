@@ -6,7 +6,7 @@
 /*   By: ravazque <ravazque@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 19:11:58 by ravazque          #+#    #+#             */
-/*   Updated: 2025/05/22 16:20:40 by ravazque         ###   ########.fr       */
+/*   Updated: 2025/05/26 16:49:26 by ravazque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,14 @@ typedef struct s_args
 	unsigned long	n_meals;
 }					t_args;
 
+typedef struct s_philo
+{
+	int				id;
+	t_args			*args;
+	pthread_mutex_t	*forks;
+}					t_philo;
+
+void				*philo_routine(void *arg);
 int					ft_parse(t_args *args, int argc, char *argv[], int *flag);
 
 #endif
