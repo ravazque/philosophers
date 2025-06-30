@@ -6,7 +6,7 @@
 #    By: ravazque <ravazque@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/19 19:28:31 by ravazque          #+#    #+#              #
-#    Updated: 2025/05/27 13:39:07 by ravazque         ###   ########.fr        #
+#    Updated: 2025/06/30 19:36:07 by ravazque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,21 +15,23 @@ NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = philo.c parsing.c nodes.c
+SRC_DIR = src
 OBJ_DIR = objects
-OBJ = $(SRC:.c=.o)
-OBJ_PATHS = $(addprefix $(OBJ_DIR)/, $(OBJ))
+
+SRC_FILES = philo.c parsing.c pthreads.c utils.c time_utils.c pthreads_utils.c 
+SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(OBJ_DIR) $(OBJ_PATHS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_PATHS)
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
-
-$(OBJ_DIR)/%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJ_DIR)

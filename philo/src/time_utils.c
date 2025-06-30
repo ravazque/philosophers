@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   time_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ravazque <ravazque@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/26 20:47:32 by ravazque          #+#    #+#             */
-/*   Updated: 2025/05/27 14:10:11 by ravazque         ###   ########.fr       */
+/*   Created: 2025/06/30 18:32:13 by ravazque          #+#    #+#             */
+/*   Updated: 2025/06/30 18:32:59 by ravazque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../include/philo.h"
 
-int	main(int argc, char *argv[])
+long long	get_time(void)
 {
-	t_chair	*table;
-	size_t	i;
-	bool	flag;
+	struct timeval	tv;
 
-	table = NULL;
-	i = 0;
-	ft_parse(&table, argc, argv, &flag);
-	if (flag == false)
-		return (2);
-	while (++i <= table->args->n_philo)
-		ft_table(&table, i);
-	ft_finsih_table(&table);
-	free_table(&table);
-	return (0);
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+void	ft_usleep(long long ms)
+{
+	long long	start;
+
+	start = get_time();
+	while (get_time() - start < ms)
+		usleep(100);
 }
