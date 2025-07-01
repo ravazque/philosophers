@@ -6,7 +6,7 @@
 /*   By: ravazque <ravazque@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 03:14:09 by ravazque          #+#    #+#             */
-/*   Updated: 2025/07/01 03:29:01 by ravazque         ###   ########.fr       */
+/*   Updated: 2025/07/01 16:25:51 by ravazque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ long long	get_time(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-int	start_threads(t_data *data)
+static int	start_threads(t_data *data)
 {
 	t_philo		*current;
 	pthread_t	monitor_thread;

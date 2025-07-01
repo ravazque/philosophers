@@ -6,13 +6,13 @@
 /*   By: ravazque <ravazque@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 03:26:53 by ravazque          #+#    #+#             */
-/*   Updated: 2025/07/01 03:27:05 by ravazque         ###   ########.fr       */
+/*   Updated: 2025/07/01 16:27:15 by ravazque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	is_positive_number(char *str)
+static int	is_positive_number(char *str)
 {
 	int	i;
 

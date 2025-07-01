@@ -6,13 +6,13 @@
 /*   By: ravazque <ravazque@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 03:14:23 by ravazque          #+#    #+#             */
-/*   Updated: 2025/07/01 03:32:40 by ravazque         ###   ########.fr       */
+/*   Updated: 2025/07/01 16:26:33 by ravazque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	set_philos(t_philo **philo, t_data *data, int i)
+static void	set_philos(t_philo **philo, t_data *data, int i)
 {
 	(*philo)->id = i + 1;
 	(*philo)->last_meal = 0;

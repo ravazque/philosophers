@@ -6,14 +6,14 @@
 #    By: ravazque <ravazque@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/01 00:52:25 by ravazque          #+#    #+#              #
-#    Updated: 2025/07/01 03:34:52 by ravazque         ###   ########.fr        #
+#    Updated: 2025/07/01 16:40:56 by ravazque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = src
 OBJ_DIR = objects

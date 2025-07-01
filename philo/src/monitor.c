@@ -6,13 +6,13 @@
 /*   By: ravazque <ravazque@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 03:14:16 by ravazque          #+#    #+#             */
-/*   Updated: 2025/07/01 03:20:39 by ravazque         ###   ########.fr       */
+/*   Updated: 2025/07/01 16:23:16 by ravazque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	all_philosophers_ate(t_data *data)
+static int	all_philosophers_ate(t_data *data)
 {
 	t_philo	*philo;
 	int		i;
@@ -34,7 +34,7 @@ int	all_philosophers_ate(t_data *data)
 	return (count == data->num_philos);
 }
 
-int	check_philos(t_data *data)
+static int	check_philos(t_data *data)
 {
 	t_philo	*philo;
 	int		i;

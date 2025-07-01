@@ -6,13 +6,13 @@
 /*   By: ravazque <ravazque@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 03:13:52 by ravazque          #+#    #+#             */
-/*   Updated: 2025/07/01 03:18:21 by ravazque         ###   ########.fr       */
+/*   Updated: 2025/07/01 16:34:42 by ravazque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	ft_usleep(long long ms, t_data *data)
+static void	ft_usleep(long long ms)
 {
 	long long	start;
 
@@ -21,24 +21,24 @@ void	ft_usleep(long long ms, t_data *data)
 		usleep(100);
 }
 
-void	eat(t_philo *philo, t_data *data)
+static void	eat(t_philo *philo, t_data *data)
 {
 	print_action(philo, "\033[38;5;120mis eating\033[0m");
 	pthread_mutex_lock(philo->meal_mutex);
-	philo->last_meal = get_time() - philo->data->start_time;
+	philo->last_meal = get_time() - data->start_time;
 	philo->meals_eaten++;
 	pthread_mutex_unlock(philo->meal_mutex);
-	ft_usleep(philo->data->time_to_eat, data);
+	ft_usleep(data->time_to_eat);
 	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
 }
 
-int	pick_up_forks_part2(t_philo *philo, pthread_mutex_t *first_fork,
+static int	pick_up_forks_part2(t_philo *philo, pthread_mutex_t *first_fork,
 		pthread_mutex_t *second_fork)
 {
 	if (philo->data->num_philos == 1)
 	{
-		ft_usleep(philo->data->time_to_die, philo->data);
+		ft_usleep(philo->data->time_to_die);
 		pthread_mutex_unlock(first_fork);
 		return (1);
 	}
@@ -53,7 +53,7 @@ int	pick_up_forks_part2(t_philo *philo, pthread_mutex_t *first_fork,
 	return (0);
 }
 
-int	pick_up_forks(t_philo *philo)
+static int	pick_up_forks(t_philo *philo)
 {
 	pthread_mutex_t	*first_fork;
 	pthread_mutex_t	*second_fork;
@@ -84,7 +84,7 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		ft_usleep(100, philo->data);
+		ft_usleep(philo->data->time_to_die / 2);
 		
 	while (!check_death(philo))
 	{
@@ -97,7 +97,7 @@ void	*routine(void *arg)
 		if (check_death(philo))
 			break ;
 		print_action(philo, "\033[38;5;117mis sleeping\033[0m");
-		ft_usleep(philo->data->time_to_sleep, philo->data);
+		ft_usleep(philo->data->time_to_sleep);
 	}
 	return (NULL);
 }

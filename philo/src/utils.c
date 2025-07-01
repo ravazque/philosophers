@@ -6,7 +6,7 @@
 /*   By: ravazque <ravazque@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 03:14:30 by ravazque          #+#    #+#             */
-/*   Updated: 2025/07/01 03:22:20 by ravazque         ###   ########.fr       */
+/*   Updated: 2025/07/01 16:22:00 by ravazque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	print_action(t_philo *philo, char *msg)
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 
-void	free_philos(t_philo *first, int count)
+static void	free_philos(t_philo *first, int count)
 {
 	t_philo	*tmp;
 	t_philo	*next;
@@ -54,7 +54,7 @@ void	free_philos(t_philo *first, int count)
 	}
 }
 
-void	destroy_mutexes(t_data *data)
+static void	destroy_mutexes(t_data *data)
 {
 	int	i;
 
