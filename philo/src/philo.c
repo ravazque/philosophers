@@ -5,52 +5,53 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ravazque <ravazque@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/26 18:33:28 by ravazque          #+#    #+#             */
-/*   Updated: 2025/06/30 20:07:06 by ravazque         ###   ########.fr       */
+/*   Created: 2025/07/01 03:14:09 by ravazque          #+#    #+#             */
+/*   Updated: 2025/07/01 03:29:01 by ravazque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	is_positive_number(char *str)
+long long	get_time(void)
 {
-	int	i;
+	struct timeval	tv;
 
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+int	start_threads(t_data *data)
+{
+	t_philo		*current;
+	pthread_t	monitor_thread;
+	int			i;
+
+	current = data->philos;
 	i = 0;
-	if (!str || str[0] == '\0')
-		return (0);
-	while (str[i])
+	while (i++ < data->num_philos)
 	{
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
-		i++;
+		pthread_mutex_lock(current->meal_mutex);
+		current->last_meal = 0;
+		pthread_mutex_unlock(current->meal_mutex);
+		current = current->next;
 	}
-	return (1);
-}
-
-int	valid_args(int argc, char **argv)
-{
-	int	i;
-
-	i = 1;
-	while (i < argc)
+	current = data->philos;
+	i = 0;
+	while (i++ < data->num_philos)
 	{
-		if (!is_positive_number(argv[i]))
-			return (0);
-		i++;
+		pthread_create(&current->thread, NULL, routine, current);
+		current = current->next;
 	}
-	return (1);
-}
-
-void	print_invalid_args_error(void)
-{
-	write(2, "\033[1;31mError:\033[0m\nYou must enter positive numbers", 50);
-	write(2, " up to 18446744073709551615.\nThese should be for:\n", 50);
-	write(2, "\tNumber of philosophers.\n", 25);
-	write(2, "\tTime to die.\n", 14);
-	write(2, "\tTime to eat.\n", 14);
-	write(2, "\tTime to sleep.\n", 16);
-	write(2, "\tNumber of times each philosopher must eat. - [OPTIONAL]\n", 57);
+	pthread_create(&monitor_thread, NULL, monitor, data);
+	pthread_join(monitor_thread, NULL);
+	current = data->philos;
+	i = 0;
+	while (i++ < data->num_philos)
+	{
+		pthread_join(current->thread, NULL);
+		current = current->next;
+	}
+	return (0);
 }
 
 int	main(int argc, char **argv)

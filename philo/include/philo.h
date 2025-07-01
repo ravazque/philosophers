@@ -6,7 +6,7 @@
 /*   By: ravazque <ravazque@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:34:21 by ravazque          #+#    #+#             */
-/*   Updated: 2025/06/30 20:27:54 by ravazque         ###   ########.fr       */
+/*   Updated: 2025/07/01 03:37:12 by ravazque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,14 @@ typedef struct s_data
 	t_philo				*philos;
 }						t_data;
 
-void		cleanup(t_data *data);
+void		*monitor(void *arg);
 void		*routine(void *arg);
-void		ft_usleep(long long ms);
+void		cleanup(t_data *data);
 void		print_invalid_args_error(void);
 void		print_action(t_philo *philo, char *msg);
 long long	get_time(void);
 int			init_data(t_data *data, int argc, char **argv);
-int			init_philosophers(t_data *data);
-int			start_threads(t_data *data);
-int			is_positive_number(char *str);
 int			valid_args(int argc, char **argv);
 int			check_death(t_philo *philo);
-int			all_philosophers_ate(t_data *data);
-int			set_philo_links(t_data *data, t_philo *first, t_philo *prev);
-int			init_mutexes(t_data *data);
-int			pick_up_forks(t_philo *philo);
-int			pick_up_forks_part2(t_philo *philo, pthread_mutex_t *first_fork,
-				pthread_mutex_t *second_fork);
-int			check_philos(t_data *data);
 
 #endif

@@ -5,12 +5,38 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ravazque <ravazque@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/26 18:32:59 by ravazque          #+#    #+#             */
-/*   Updated: 2025/06/30 19:34:13 by ravazque         ###   ########.fr       */
+/*   Created: 2025/07/01 03:14:30 by ravazque          #+#    #+#             */
+/*   Updated: 2025/07/01 03:22:20 by ravazque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+void	print_invalid_args_error(void)
+{
+	write(2, "\033[1;31mError:\033[0m\nYou must enter positive numbers", 50);
+	write(2, " up to 18446744073709551615.\nThese should be for:\n", 50);
+	write(2, "\tNumber of philosophers.\n", 25);
+	write(2, "\tTime to die.\n", 14);
+	write(2, "\tTime to eat.\n", 14);
+	write(2, "\tTime to sleep.\n", 16);
+	write(2, "\tNumber of times each philosopher must eat. - [OPTIONAL]\n", 57);
+}
+
+void	print_action(t_philo *philo, char *msg)
+{
+	long long	timestamp;
+
+	pthread_mutex_lock(&philo->data->print_mutex);
+	pthread_mutex_lock(&philo->data->death_mutex);
+	if (!philo->data->someone_died)
+	{
+		timestamp = get_time() - philo->data->start_time;
+		printf("%lld %d %s\n", timestamp, philo->id, msg);
+	}
+	pthread_mutex_unlock(&philo->data->death_mutex);
+	pthread_mutex_unlock(&philo->data->print_mutex);
+}
 
 void	free_philos(t_philo *first, int count)
 {
@@ -53,41 +79,4 @@ void	cleanup(t_data *data)
 	if (data->meal_mutexes)
 		free(data->meal_mutexes);
 	destroy_mutexes(data);
-}
-
-void	print_action(t_philo *philo, char *msg)
-{
-	long long	timestamp;
-
-	pthread_mutex_lock(&philo->data->print_mutex);
-	pthread_mutex_lock(&philo->data->death_mutex);
-	if (!philo->data->someone_died)
-	{
-		timestamp = get_time() - philo->data->start_time;
-		printf("%lld %d %s\n", timestamp, philo->id, msg);
-	}
-	pthread_mutex_unlock(&philo->data->death_mutex);
-	pthread_mutex_unlock(&philo->data->print_mutex);
-}
-
-int	all_philosophers_ate(t_data *data)
-{
-	t_philo	*philo;
-	int		i;
-	int		count;
-
-	if (data->max_meals == -1)
-		return (0);
-	philo = data->philos;
-	i = 0;
-	count = 0;
-	while (i++ < data->num_philos)
-	{
-		pthread_mutex_lock(philo->meal_mutex);
-		if (philo->meals_eaten >= data->max_meals)
-			count++;
-		pthread_mutex_unlock(philo->meal_mutex);
-		philo = philo->next;
-	}
-	return (count == data->num_philos);
 }
