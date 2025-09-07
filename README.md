@@ -74,7 +74,7 @@ These functions are essential for implementing **philosophers**, as they allow c
 </details>
 
 <details>
-<summary><strong>Mandatory Requirements</strong></summary>
+<summary><strong>Arguments and Functioning</strong></summary>
 
 ### Program Arguments
 
