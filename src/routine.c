@@ -6,7 +6,7 @@
 /*   By: ravazque <ravazque@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 03:13:52 by ravazque          #+#    #+#             */
-/*   Updated: 2025/07/01 16:34:42 by ravazque         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:17:14 by ravazque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
 		ft_usleep(philo->data->time_to_die / 2);
-		
 	while (!check_death(philo))
 	{
 		print_action(philo, "\033[38;5;215mis thinking\033[0m");

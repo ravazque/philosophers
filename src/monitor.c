@@ -6,7 +6,7 @@
 /*   By: ravazque <ravazque@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 03:14:16 by ravazque          #+#    #+#             */
-/*   Updated: 2025/07/01 16:23:16 by ravazque         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:16:31 by ravazque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static int	all_philosophers_ate(t_data *data)
 
 static int	check_philos(t_data *data)
 {
-	t_philo	*philo;
-	int		i;
-	long long current_time;
+	t_philo		*philo;
+	int			i;
+	long long	current_time;
 
 	philo = data->philos;
 	i = 0;
