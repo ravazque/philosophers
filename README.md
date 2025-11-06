@@ -1,6 +1,5 @@
-<p align="center">
-  <img src="https://github.com/ayogun/42-project-badges/raw/main/badges/philosopherse.png" alt="Philosophers Badge" width="150" height="150">
-</p>
+
+# PHILOSOPHERS
 
 ## 📖 About
 
@@ -173,7 +172,7 @@ The philosophers project teaches advanced concurrent programming concepts:
 
 ## ⚙️ Technical Specifications
 
-- **Language**: C (C99 standard)
+- **Language**: C (C90 standard)
 - **Compiler**: cc with flags `-Wall -Wextra -Werror -pthread`
 - **Threading Library**: POSIX threads (pthreads)
 - **Synchronization**: Mutexes for fork protection and state management
